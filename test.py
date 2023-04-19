@@ -4,9 +4,12 @@ import scraper
 class Tests(unittest.TestCase):
 
     def test_get_soup(self):
-        soup = scraper.get_soup()
+        soup = scraper.get_soup
+        print(soup)
+        soup_sample = soup[:142]
+        print(soup_sample)
         soup_expected = """<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><link rel="preload" href="https://wassets.hscicdn.com/static/fonts/CiIcons/ci-icons"""
-        self.assertEqual(soup_expected, soup[:142])
+        self.assertEqual(soup_expected, soup_sample)
 
     def test_isupper(self):
         self.assertTrue('FOO'.isupper())

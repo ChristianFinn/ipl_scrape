@@ -31,4 +31,6 @@ def get_soup():
     b = url.read()
     s = b.decode("utf-8")
     soup = BeautifulSoup(s)
+    soup.prettify
+    print(soup)
     return soup
