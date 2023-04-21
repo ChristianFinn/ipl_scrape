@@ -2,12 +2,14 @@ import urllib
 from urllib import request
 from bs4 import BeautifulSoup
 
+ipl_2022_url = "https://www.espncricinfo.com/series/indian-premier-league-2022-1298423/match-results"
+
 
 def extract_data():
     soup = get_soup()
 
     data = []
-    matches = soup.find_all('div', class_='match-score-block')
+    matches = get_matches(soup)
 
     for match in matches:
         match_data = {}
@@ -27,10 +29,8 @@ def extract_data():
     return data
 
 def get_soup():
-    url = urllib.request.urlopen("https://www.espncricinfo.com/series/indian-premier-league-2022-1298423/match-results")
+    url = urllib.request.urlopen(ipl_2022_url)
     b = url.read()
     s = b.decode("utf-8")
-    soup = BeautifulSoup(s)
-    soup.prettify
-    print(soup)
+    soup = BeautifulSoup(s, features="html.parser")
     return soup

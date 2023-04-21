@@ -1,6 +1,11 @@
 import scraper
 
-soup = scraper.get_soup()
-print(soup[:10])
+print("test starting")
 
-text = """<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><link rel="preload" href="https://wassets.hscicdn.com/static/fonts/CiIcons/ci-icons"""
+soup = scraper.get_soup()
+pretty_soup = soup.prettify()
+length = len(pretty_soup)
+for i in range(length):
+    if pretty_soup[i:(i+11)] == "Sat, 26 Mar":
+        print("found!!!")
+        print(pretty_soup[i-100:i+100])
