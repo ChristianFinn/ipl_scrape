@@ -1,22 +1,48 @@
 import unittest
-import scraper
+import soup_functions
+import match_scraping
 
 class Tests(unittest.TestCase):
 
     def test_get_soup(self):
-        soup = str(scraper.get_soup())
+        soup = str(soup_functions.get_soup())
         soup_sample = (soup[:110])
         soup_expected = """<!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8"/><link as="font" crossorigin="anonymous" href="htt"""
         self.assertEqual(soup_sample, soup_expected)
 
 
+    def test_get_match_date_one(self):
+        soup = soup_functions.get_soup()
+        date_expected = "Sat, 26 Mar"
+        first_date = match_scraping.get_match_date(soup, 0)
+        self.assertEqual(date_expected, first_date)
+
+    def test_get_match_date_two(self):
+        soup = soup_functions.get_soup()
+        date_expected = "Sun, 27 Mar"
+        first_date = match_scraping.get_match_date(soup, 1)
+        self.assertEqual(date_expected, first_date)
+
+    def test_get_match_date_fifteen(self):
+        soup = soup_functions.get_soup()
+        date_expected = "Thu, 07 Apr"
+        first_date = match_scraping.get_match_date(soup, 14)
+        self.assertEqual(date_expected, first_date)
+
+
+    def test_get_teams(self):
+        soup = soup_functions.get_soup()
+        teams_expected = ["CSK", "KKR"]
+        teams = match_scraping.get_team_names(soup, 0)
+        self.assertEqual(teams_expected, teams)
+
+
     def test_get_matches(self):
-        soup = str(scraper.get_matches(scraper.get_soup()))
-        first_match_ = "#main-container > div.ds-relative > div.lg\:ds-container.lg\:ds-mx-auto.lg\:ds-px-5 > div.ds-flex.ds-space-x-5 > div.ds-grow.ds-px-0 > div.ds-mb-4 > div > div > div > div.ds-p-4.hover\:ds-bg-ui-fill-translucent.ds-border-none.ds-border-t.ds-border-line"
-        soup_expected = """<!DOCTYPE html>
-<html lang="en"><head><meta charset="utf-8"/><link as="font" crossorigin="anonymous" href="htt"""
-        self.assertEqual(soup_sample, soup_expected)
+        soup = soup_functions.get_soup()
+        first_match_title_expected = "CSK vs KKR date: Sat, 26 Mar"
+        first_match_title = match_scraping.get_match_titles(soup, 0)
+        self.assertEqual(first_match_title, first_match_title_expected)
 
 if __name__ == '__main__':
     unittest.main()

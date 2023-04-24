@@ -3,13 +3,22 @@ def get_matches(soup):
     return matches
 
 
-def get_match_title(match_soup):
-
-    # team1 = match_soup.ge
-    match_date_html = match_soup.find('div', class_= "ds-text-compact-xs ds-font-bold ds-w-24")
-    return match_date_html
-    #  match_date = match_date_html.text.strip()
+def get_match_titles(soup, match_index):
+    date = get_match_date(soup, match_index)
     # match_title = team1 + " vs " + team2 + " date: " + match_date
-    # print(match_date)
     # return match_title
+
+def get_match_date(soup, match_index):
+    match_dates = soup.find_all('div', class_= "ds-text-compact-xs ds-font-bold ds-w-24")
+    match_date_html = str(match_dates[match_index])
+    match_date = match_date_html[53:64]
+    return match_date
+
+def get_team_name_one(soup, match_index):
+    game = (soup.find_all('div', class_ = "ci-team-score ds-flex ds-justify-between ds-items-center ds-text-typo ds-opacity-50 ds-my-1"))[match_index]
+    team_html = str(game.find('p', class_ = "ds-text-tight-m ds-font-bold ds-capitalize ds-truncate"))
+    team = team_html[66:-4]
+    print(team)
+
+    return(team)
 
