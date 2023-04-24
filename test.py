@@ -72,6 +72,14 @@ class Tests(unittest.TestCase):
         teams = match_scraping.get_team_name_two(soup, 14)
         self.assertEqual(teams_expected, teams)
 
+    
+    def test_abbreviations_dict(self):
+        soup = soup_functions.get_soup()
+        team_abrv_expected = "CSK"
+        team = match_scraping.get_team_name_one(soup, 0)
+        team_abrv = match_scraping.team_name_abbreviations_dict[team]
+        self.assertEqual(team_abrv_expected, team_abrv)
+
 
     def test_get_teams(self):
         soup = soup_functions.get_soup()

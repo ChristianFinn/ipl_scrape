@@ -1,5 +1,7 @@
 import soup_functions
 
+team_name_abbreviations_dict = {"Chennai Super Kings": "CSK", "Delhi Capitals": "DC", "Gujarat Titans": "GT", "Kolkata Knight Riders": "KKR", "Lucknow Super Giants": "LSG", "Mumbai Indians": "MI", "Punjab Kings": "PBKS", "Rajasthan Royals": "RR", "Royal Challengers Bangalore": "RCB", "Sunrisers Hyderabad": "SRH"}
+
 def get_matches(soup):
     matches = soup.find_all('div', class_='ds-mb-2')
     return matches
@@ -8,8 +10,9 @@ def get_matches(soup):
 def get_match_titles(soup, match_index):
     date = get_match_date(soup, match_index)
     team1 = get_team_name_one(soup, match_index)
-    # match_title = team1 + " vs " + team2 + " date: " + match_date
-    # return match_title
+    team2 = get_team_name_two(soup, match_index)
+    match_title = team_name_abbreviations_dict[team1] + " vs " + team_name_abbreviations_dict[team2] + " date: " + date
+    return match_title
 
 def get_match_date(soup, match_index):
     match_dates = soup.find_all('div', class_= "ds-text-compact-xs ds-font-bold ds-w-24")

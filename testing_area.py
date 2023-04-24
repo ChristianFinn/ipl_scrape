@@ -5,13 +5,13 @@ import match_scraping
 
 print("test starting")
 
+# team_dict = match_scraping.team_name_abbreviations_dict
+# print(team_dict["Chennai Super Kings"])
+
+# soup = soup_functions.get_soup()
 
 
-
-soup = soup_functions.get_soup()
-
-
-print(match_scraping.get_team_name_one(soup, 0))
+# print(match_scraping.get_team_name_one(soup, 0))
 
 # team = match_scraping.get_team_names(soup, 0)
 # print(team)
