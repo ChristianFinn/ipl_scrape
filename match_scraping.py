@@ -32,6 +32,20 @@ def get_team_name_two(soup, match_index):
     team = team_html[66:-4]
     return(team)
 
+def get_team_names(soup, match_index):
+    teams = []
+    team1 = get_team_name_one(soup, match_index)
+    teams.append(team_name_abbreviations_dict[team1])
+    team2 = get_team_name_two(soup, match_index)
+    teams.append(team_name_abbreviations_dict[team2])
+    return teams
+
 def get_match_url(soup, match_index):
-    url = "insertcode"+soup_functions.base_url
+
+    match = (soup.find_all('div', class_ = "ds-grow ds-px-4 ds-border-r ds-border-line-default-translucent"))[match_index]
+    match_html = (match.find('a', class_ = "ds-no-tap-higlight"))
+    pretty_match = match_html.prettify()
+    pretty_match_front = pretty_match[36:]
+    url_add_on = pretty_match_front.split('"')[0]
+    url = soup_functions.base_url + url_add_on
     return url

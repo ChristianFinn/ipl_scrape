@@ -8,7 +8,16 @@ print("test starting")
 # team_dict = match_scraping.team_name_abbreviations_dict
 # print(team_dict["Chennai Super Kings"])
 
-# soup = soup_functions.get_soup()
+soup = soup_functions.get_soup()
+match_index = 0
+
+
+
+match_scraping.get_match_url(soup, match_index)
+
+# team_html = str(match.find('p', class_ = "ds-text-tight-m ds-font-bold ds-capitalize ds-truncate"))
+# team = team_html[66:-4]
+
 
 
 # print(match_scraping.get_team_name_one(soup, 0))

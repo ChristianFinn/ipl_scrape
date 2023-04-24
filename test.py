@@ -94,5 +94,26 @@ class Tests(unittest.TestCase):
         first_match_title = match_scraping.get_match_titles(soup, 0)
         self.assertEqual(first_match_title, first_match_title_expected)
 
+
+    def test_get_match_url(self):
+        soup = soup_functions.get_soup()
+        url_expected = "https://www.espncricinfo.com/series/indian-premier-league-2022-1298423/chennai-super-kings-vs-kolkata-knight-riders-1st-match-1304047/full-scorecard"
+        url = match_scraping.get_match_url(soup, 0)
+        self.assertEqual(url, url_expected)
+
+
+    def test_get_match_url_two(self):
+        soup = soup_functions.get_soup()
+        url_expected = "https://www.espncricinfo.com/series/indian-premier-league-2022-1298423/delhi-capitals-vs-mumbai-indians-2nd-match-1304048/full-scorecard"
+        url = match_scraping.get_match_url(soup, 1)
+        self.assertEqual(url, url_expected)
+
+    
+    def test_get_match_url_fifteen(self):
+        soup = soup_functions.get_soup()
+        url_expected = "https://www.espncricinfo.com/series/indian-premier-league-2022-1298423/lucknow-super-giants-vs-delhi-capitals-15th-match-1304061/full-scorecard"
+        url = match_scraping.get_match_url(soup, 14)
+        self.assertEqual(url, url_expected)
+
 if __name__ == '__main__':
     unittest.main()
