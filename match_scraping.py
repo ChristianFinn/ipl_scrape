@@ -2,11 +2,6 @@ import soup_functions
 
 team_name_abbreviations_dict = {"Chennai Super Kings": "CSK", "Delhi Capitals": "DC", "Gujarat Titans": "GT", "Kolkata Knight Riders": "KKR", "Lucknow Super Giants": "LSG", "Mumbai Indians": "MI", "Punjab Kings": "PBKS", "Rajasthan Royals": "RR", "Royal Challengers Bangalore": "RCB", "Sunrisers Hyderabad": "SRH"}
 
-def get_matches(soup):
-    matches = soup.find_all('div', class_='ds-mb-2')
-    return matches
-
-
 def get_match_titles(soup, match_index):
     date = get_match_date(soup, match_index)
     team1 = get_team_name_one(soup, match_index)
@@ -18,6 +13,11 @@ def get_match_date(soup, match_index):
     match_dates = soup.find_all('div', class_= "ds-text-compact-xs ds-font-bold ds-w-24")
     match_date_html = str(match_dates[match_index])
     match_date = match_date_html[53:64]
+    i = 1
+    while match_date == "</div>":
+        match_date_html = str(match_dates[match_index - i])
+        match_date = match_date_html[53:64]
+        i += 1
     return match_date
 
 def get_team_name_one(soup, match_index):
@@ -41,7 +41,6 @@ def get_team_names(soup, match_index):
     return teams
 
 def get_match_url(soup, match_index):
-
     match = (soup.find_all('div', class_ = "ds-grow ds-px-4 ds-border-r ds-border-line-default-translucent"))[match_index]
     match_html = (match.find('a', class_ = "ds-no-tap-higlight"))
     pretty_match = match_html.prettify()
