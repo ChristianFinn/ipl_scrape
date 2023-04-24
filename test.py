@@ -31,6 +31,48 @@ class Tests(unittest.TestCase):
         self.assertEqual(date_expected, first_date)
 
 
+    def test_get_team_name_one(self):
+        soup = soup_functions.get_soup()
+        teams_expected = "Chennai Super Kings"
+        teams = match_scraping.get_team_name_one(soup, 0)
+        self.assertEqual(teams_expected, teams)
+
+
+    def test_get_team_name_one_two(self):
+        soup = soup_functions.get_soup()
+        teams_expected = "Mumbai Indians"
+        teams = match_scraping.get_team_name_one(soup, 1)
+        self.assertEqual(teams_expected, teams)
+
+    
+    def test_get_team_name_one_fifteen(self):
+        soup = soup_functions.get_soup()
+        teams_expected = "Delhi Capitals"
+        teams = match_scraping.get_team_name_one(soup, 14)
+        self.assertEqual(teams_expected, teams)
+
+
+    def test_get_team_name_two(self):
+        soup = soup_functions.get_soup()
+        teams_expected = "Kolkata Knight Riders"
+        teams = match_scraping.get_team_name_two(soup, 0)
+        self.assertEqual(teams_expected, teams)
+
+
+    def test_get_team_name_two_two(self):
+        soup = soup_functions.get_soup()
+        teams_expected = "Delhi Capitals"
+        teams = match_scraping.get_team_name_two(soup, 1)
+        self.assertEqual(teams_expected, teams)
+
+    
+    def test_get_team_name_two_fifteen(self):
+        soup = soup_functions.get_soup()
+        teams_expected = "Lucknow Super Giants"
+        teams = match_scraping.get_team_name_two(soup, 14)
+        self.assertEqual(teams_expected, teams)
+
+
     def test_get_teams(self):
         soup = soup_functions.get_soup()
         teams_expected = ["CSK", "KKR"]
