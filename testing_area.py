@@ -1,19 +1,29 @@
 import soup_functions
 import match_scraping
+import data_storing
 
 
 
 print("test starting")
 
+data = data_storing.create_matches_url_dict()
+for match in data:
+    print(match)
+
+# def prac_func(a = 5):
+#     print(a)
+
+# prac_func(2)
+
 # team_dict = match_scraping.team_name_abbreviations_dict
 # print(team_dict["Chennai Super Kings"])
 
-soup = soup_functions.get_soup()
-match_index = 0
+# soup = soup_functions.get_soup()
+# match_index = 0
 
 
 
-match_scraping.get_match_url(soup, match_index)
+# match_scraping.get_match_url(soup, match_index)
 
 # team_html = str(match.find('p', class_ = "ds-text-tight-m ds-font-bold ds-capitalize ds-truncate"))
 # team = team_html[66:-4]

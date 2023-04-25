@@ -6,8 +6,8 @@ base_url = "https://www.espncricinfo.com"
 all_matches_url = base_url+"/series/indian-premier-league-2022-1298423/match-results"
 
 
-def get_soup():
-    url = urllib.request.urlopen(all_matches_url)
+def get_soup(url = all_matches_url):
+    url = urllib.request.urlopen(url)
     b = url.read()
     s = b.decode("utf-8")
     soup = BeautifulSoup(s, features="html.parser")
