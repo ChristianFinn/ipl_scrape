@@ -2,6 +2,7 @@ import unittest
 import soup_functions
 import match_scraping
 import data_storing
+import match_details_scraping
 
 class Tests(unittest.TestCase):
 
@@ -107,6 +108,39 @@ class Tests(unittest.TestCase):
         dict = data_storing.create_matches_url_dict()
         first_entry = dict["CSK vs KKR date: Sat, 26 Mar"]
         self.assertEqual(first_entry_expected, first_entry)
+
+
+    def test_get_batsmen_1(self):
+        soup = soup_functions.get_soup("https://www.espncricinfo.com/series/indian-premier-league-2022-1298423/chennai-super-kings-vs-kolkata-knight-riders-1st-match-1304047/full-scorecard")
+        first_name_expected = "Ruturaj Gaikwad"
+        names = match_details_scraping.get_team_1_batsmen_names(soup)
+        first_name = names[0]
+        self.assertEqual(first_name_expected, first_name)
+
+
+    def test_get_batsmen_1_3(self):
+        soup = soup_functions.get_soup("https://www.espncricinfo.com/series/indian-premier-league-2022-1298423/punjab-kings-vs-royal-challengers-bangalore-3rd-match-1304049/full-scorecard")
+        first_name_expected = "Dinesh Karthik"
+        names = match_details_scraping.get_team_1_batsmen_names(soup)
+        first_name = names[3]
+        self.assertEqual(first_name_expected, first_name)
+
+
+    def test_get_batsmen_2(self):
+        soup = soup_functions.get_soup("https://www.espncricinfo.com/series/indian-premier-league-2022-1298423/chennai-super-kings-vs-kolkata-knight-riders-1st-match-1304047/full-scorecard")
+        first_name_expected = "Ajinkya Rahane"
+        names = match_details_scraping.get_team_2_batsmen_names(soup)
+        first_name = names[0]
+        self.assertEqual(first_name_expected, first_name)
+
+    
+    def test_get_batsmen_2_3(self):
+        soup = soup_functions.get_soup("https://www.espncricinfo.com/series/indian-premier-league-2022-1298423/punjab-kings-vs-royal-challengers-bangalore-3rd-match-1304049/full-scorecard")
+        first_name_expected = "Liam Livingstone"
+        names = match_details_scraping.get_team_2_batsmen_names(soup)
+        first_name = names[3]
+        self.assertEqual(first_name_expected, first_name)
+
 
 if __name__ == '__main__':
     unittest.main()
