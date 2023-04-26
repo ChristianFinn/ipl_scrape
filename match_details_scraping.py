@@ -1,5 +1,7 @@
 import soup_functions
 import data_storing
+import pickle
+import pandas as pd
 
 matches_url_dict = data_storing.create_matches_url_dict()
 
@@ -81,7 +83,9 @@ def get_is_outs(soup, team_no):
         if pretty_bats[i:i+41] == "ds-flex ds-cursor-pointer ds-items-center":
             is_out_list.append(True)
         elif pretty_bats[i:i+49] == "ds-border-line-primary ci-scorecard-player-notout":
-            is_out_list.append(False)        
+            is_out_list.append(False)   
+        elif pretty_bats[i:i+15] == "retired not out":
+            is_out_list.append(False)  
     return is_out_list
 
 def get_all_batsmen_detes(matches_url_dict):
@@ -106,13 +110,20 @@ def get_all_batsmen_detes(matches_url_dict):
 
         team_2_batsmen_dict = {}
         for i, name in enumerate(team_2_batsmen):
-            print(team_2_is_outs[i])
-            # team_2_batsmen_dict[name] = [team_2_runs[i], team_2_other[i][0], team_2_other[i][1], team_2_other[i][2], team_2_is_outs[i]]
+            team_2_batsmen_dict[name] = [team_2_runs[i], team_2_other[i][0], team_2_other[i][1], team_2_other[i][2], team_2_is_outs[i]]
 
         IPL_Dictionary[match_index] = (match, url, team_1_batsmen_dict, team_2_batsmen_dict)
 
-    print(IPL_Dictionary)
+    return IPL_Dictionary
         
 
 
-get_all_batsmen_detes(matches_url_dict)
+final_dictionary = get_all_batsmen_detes(matches_url_dict)
+print(final_dictionary)
+
+with open('ipl_data.pickle', 'wb') as handle:
+    pickle.dump(final_dictionary, handle, protocol=pickle.HIGHEST_PROTOCOL)
+
+print("pickled")
+
+# df = pd.DataFrame([final_dictionary])

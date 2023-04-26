@@ -1,12 +1,21 @@
 import soup_functions
 import match_scraping
 import data_storing
+import pickle
+import pandas as pd
 
 
 
 print("test starting")
 
-print(len("ds-border-line-primary ci-scorecard-player-notout"))
+with open('ipl_data.pickle', 'rb') as handle:
+    b = pickle.load(handle)
+
+print(b)
+
+# dict_ = {'key 1': 'value 1', 'key 2': 'value 2', 'key 3': 'value 3'}
+# df = pd.DataFrame([dict_])
+# print(df.head())
 
 # data = data_storing.create_matches_url_dict()
 # for match in data:
