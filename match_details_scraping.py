@@ -77,8 +77,8 @@ def get_is_outs(soup, team_no):
     pretty_bats = all_batsmen.prettify()
     is_out_list = []
     letter_len = len(pretty_bats)
-    for i in range(letter_len, 0, -1):
-        if pretty_bats[i:i+31] == "ds-text-tight-s ds-font-regular":
+    for i in range(letter_len):
+        if pretty_bats[i:i+41] == "ds-flex ds-cursor-pointer ds-items-center":
             is_out_list.append(True)
         elif pretty_bats[i:i+49] == "ds-border-line-primary ci-scorecard-player-notout":
             is_out_list.append(False)        
