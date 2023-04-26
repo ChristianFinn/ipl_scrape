@@ -102,15 +102,16 @@ def get_all_batsmen_detes(matches_url_dict):
 
         team_1_batsmen_dict = {}
         for i, name in enumerate(team_1_batsmen):
-            team_1_batsmen_dict[name] = [team_1_runs[i], team_1_other[i][0], team_1_other[i][1], team_1_other[i][2], team_1_other[i][0], team_1_is_outs[i]]
+            team_1_batsmen_dict[name] = [team_1_runs[i], team_1_other[i][0], team_1_other[i][1], team_1_other[i][2], team_1_is_outs[i]]
 
         team_2_batsmen_dict = {}
         for i, name in enumerate(team_2_batsmen):
-            team_2_batsmen_dict[name] = [team_2_runs[i], team_2_other[i][0], team_2_other[i][1], team_2_other[i][2], team_2_other[i][0], team_2_is_outs[i]]
+            print(team_2_is_outs[i])
+            # team_2_batsmen_dict[name] = [team_2_runs[i], team_2_other[i][0], team_2_other[i][1], team_2_other[i][2], team_2_is_outs[i]]
 
         IPL_Dictionary[match_index] = (match, url, team_1_batsmen_dict, team_2_batsmen_dict)
 
-        print(IPL_Dictionary)
+    print(IPL_Dictionary)
         
 
 
