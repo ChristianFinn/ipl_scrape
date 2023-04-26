@@ -6,9 +6,11 @@ import data_storing
 
 print("test starting")
 
-data = data_storing.create_matches_url_dict()
-for match in data:
-    print(match)
+print(len("ds-border-line-primary ci-scorecard-player-notout"))
+
+# data = data_storing.create_matches_url_dict()
+# for match in data:
+#     print(match)
 
 # def prac_func(a = 5):
 #     print(a)

@@ -164,29 +164,59 @@ class Tests(unittest.TestCase):
     def test_ball_1(self):
         soup = soup_functions.get_soup("https://www.espncricinfo.com/series/indian-premier-league-2022-1298423/chennai-super-kings-vs-kolkata-knight-riders-1st-match-1304047/full-scorecard")
         first_run_expected = 4
-        runs = match_details_scraping.get_runs(soup, 1, "balls")
-        first_run = runs[0]
+        runs = match_details_scraping.get_runs(soup, 1, "other", 7)
+        first_run = runs[0][0]
         self.assertEqual(first_run_expected, first_run)
 
     def test_balls_1_3(self):
         soup = soup_functions.get_soup("https://www.espncricinfo.com/series/indian-premier-league-2022-1298423/punjab-kings-vs-royal-challengers-bangalore-3rd-match-1304049/full-scorecard")
         first_run_expected = 14
-        names = match_details_scraping.get_runs(soup, 1, "balls")
-        first_run = names[3]
+        names = match_details_scraping.get_runs(soup, 1, "other", 7)
+        first_run = names[3][0]
         self.assertEqual(first_run_expected, first_run)
 
     def test_balls_2(self):
         soup = soup_functions.get_soup("https://www.espncricinfo.com/series/indian-premier-league-2022-1298423/chennai-super-kings-vs-kolkata-knight-riders-1st-match-1304047/full-scorecard")
         first_run_expected = 34
-        names = match_details_scraping.get_runs(soup, 2, "balls")
-        first_run = names[0]
+        names = match_details_scraping.get_runs(soup, 2, "other", 7)
+        first_run = names[0][0]
         self.assertEqual(first_run_expected, first_run)
     
     def test_balls_2_3(self):
         soup = soup_functions.get_soup("https://www.espncricinfo.com/series/indian-premier-league-2022-1298423/punjab-kings-vs-royal-challengers-bangalore-3rd-match-1304049/full-scorecard")
         first_run_expected = 10
-        names = match_details_scraping.get_runs(soup, 2, "balls")
+        names = match_details_scraping.get_runs(soup, 2, "other", 7)
+        first_run = names[3][0]
+        self.assertEqual(first_run_expected, first_run)
+
+# testing is outs
+    def test_is_out_1(self):
+        soup = soup_functions.get_soup("https://www.espncricinfo.com/series/indian-premier-league-2022-1298423/chennai-super-kings-vs-kolkata-knight-riders-1st-match-1304047/full-scorecard")
+        first_run_expected = True
+        runs = match_details_scraping.get_is_outs(soup, 1)
+        first_run = runs[0]
+        self.assertEqual(first_run_expected, first_run)
+
+    def test_is_out_1_3(self):
+        soup = soup_functions.get_soup("https://www.espncricinfo.com/series/indian-premier-league-2022-1298423/punjab-kings-vs-royal-challengers-bangalore-3rd-match-1304049/full-scorecard")
+        first_run_expected = False
+        names = match_details_scraping.get_is_outs(soup, 1)
         first_run = names[3]
         self.assertEqual(first_run_expected, first_run)
+
+    def test_is_out_2(self):
+        soup = soup_functions.get_soup("https://www.espncricinfo.com/series/indian-premier-league-2022-1298423/chennai-super-kings-vs-kolkata-knight-riders-1st-match-1304047/full-scorecard")
+        first_run_expected = True
+        names = match_details_scraping.get_is_outs(soup, 2)
+        first_run = names[0]
+        self.assertEqual(first_run_expected, first_run)
+    
+    def test_is_out_2_3(self):
+        soup = soup_functions.get_soup("https://www.espncricinfo.com/series/indian-premier-league-2022-1298423/punjab-kings-vs-royal-challengers-bangalore-3rd-match-1304049/full-scorecard")
+        first_run_expected = True
+        names = match_details_scraping.get_is_outs(soup, 2)
+        first_run = names[3]
+        self.assertEqual(first_run_expected, first_run)
+
 if __name__ == '__main__':
     unittest.main()

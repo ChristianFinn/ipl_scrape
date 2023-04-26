@@ -13,5 +13,11 @@ def create_matches_url_dict():
 
     return matches_dict
 
+
+def create_player_dict():
+    print("code to write here to use match_details_scraping.get_all_batsmen_detes")
+    
+
+
 # df = pd.DataFrame.from_dict(matches_dict, orient='index')
 # print(df.head())

@@ -29,13 +29,14 @@ def get_batsmen_names(soup, team_no):
     return names
 
 
-def get_runs(soup, team_no, param, player_id = 0):
+def get_runs(soup, team_no, param, no_of_batsmen = 0):
+    out = []
     if param == "runs":
         html_before = "<strong>"
         start_id = 11
         end_id = 2
         loop_again = False
-    elif param == "balls":
+    elif param == "other":
         html_before = '-right">'
         start_id = 10
         end_id = 1
@@ -62,24 +63,47 @@ def get_runs(soup, team_no, param, player_id = 0):
         except:
             items_to_remove.append(run_num)
 
+
     if loop_again:
-        out = (value_store[(player_id * 4):(player_id * 4) + 4])
+        for player_id in range(no_of_batsmen):
+            out.append(value_store[(player_id * 4):(player_id * 4) + 4])
     else:
         out = value_store
     return out
 
+
+def get_is_outs(soup, team_no):
+    all_batsmen = (soup.find_all('div', class_ = "ds-p-0"))[team_no]
+    pretty_bats = all_batsmen.prettify()
+    is_out_list = []
+    letter_len = len(pretty_bats)
+    for i in range(letter_len, 0, -1):
+        if pretty_bats[i:i+31] == "ds-text-tight-s ds-font-regular":
+            is_out_list.append(True)
+        elif pretty_bats[i:i+49] == "ds-border-line-primary ci-scorecard-player-notout":
+            is_out_list.append(False)        
+    return is_out_list
 
 def get_all_batsmen_detes(matches_url_dict):
     for match in matches_url_dict:
         url = matches_url_dict[match]
         soup = soup_functions.get_soup(url)
         team_1_batsmen = get_batsmen_names(soup, 1)
+        team_1_no_of_batsmen = len(team_1_batsmen)
         team_2_batsmen = get_batsmen_names(soup, 2)
+        team_2_no_of_batsmen = len(team_2_batsmen)
+        team_1_is_outs = get_is_outs(soup, 1)
+        team_2_is_outs = get_is_outs(soup, 2)
         team_1_runs = get_runs(soup, 1, "runs")
         team_2_runs = get_runs(soup, 2, "runs")
-        team_1_balls = get_runs(soup, 1, "balls")
-        team_2_balls = get_runs(soup, 1, "balls")
-        print(team_1_balls)
+        team_1_other = get_runs(soup, 1, "other", team_1_no_of_batsmen)
+        team_2_other = get_runs(soup, 2, "other", team_2_no_of_batsmen)
+        print(team_1_runs)
+        print(team_1_batsmen)
+        print(team_1_is_outs)
+        print(team_2_batsmen)
+        print(team_2_is_outs)
+        
 
 
 get_all_batsmen_detes(matches_url_dict)
