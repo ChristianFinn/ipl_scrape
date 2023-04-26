@@ -85,7 +85,8 @@ def get_is_outs(soup, team_no):
     return is_out_list
 
 def get_all_batsmen_detes(matches_url_dict):
-    for match in matches_url_dict:
+    IPL_Dictionary = {}
+    for match_index, match in enumerate(matches_url_dict):
         url = matches_url_dict[match]
         soup = soup_functions.get_soup(url)
         team_1_batsmen = get_batsmen_names(soup, 1)
@@ -98,11 +99,18 @@ def get_all_batsmen_detes(matches_url_dict):
         team_2_runs = get_runs(soup, 2, "runs")
         team_1_other = get_runs(soup, 1, "other", team_1_no_of_batsmen)
         team_2_other = get_runs(soup, 2, "other", team_2_no_of_batsmen)
-        print(team_1_runs)
-        print(team_1_batsmen)
-        print(team_1_is_outs)
-        print(team_2_batsmen)
-        print(team_2_is_outs)
+
+        team_1_batsmen_dict = {}
+        for i, name in enumerate(team_1_batsmen):
+            team_1_batsmen_dict[name] = [team_1_runs[i], team_1_other[i][0], team_1_other[i][1], team_1_other[i][2], team_1_other[i][0], team_1_is_outs[i]]
+
+        team_2_batsmen_dict = {}
+        for i, name in enumerate(team_2_batsmen):
+            team_2_batsmen_dict[name] = [team_2_runs[i], team_2_other[i][0], team_2_other[i][1], team_2_other[i][2], team_2_other[i][0], team_2_is_outs[i]]
+
+        IPL_Dictionary[match_index] = (match, url, team_1_batsmen_dict, team_2_batsmen_dict)
+
+        print(IPL_Dictionary)
         
 
 
